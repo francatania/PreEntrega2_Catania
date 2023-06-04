@@ -12,12 +12,14 @@ class Autos {
 }
 
 const autos = [{ id: 1327, marca: "Peugeot", nombre: "208", precio: 7500000, stock: 13 },
-{ id: 1327, marca: "Peugeot", nombre: "308", precio: 9500000, stock: 10 },
-{ id: 1327, marca: "FIAT", nombre: "Cronos", precio: 5500000, stock: 24 },
-{ id: 1327, marca: "FIAT", nombre: "Argo", precio: 6200000, stock: 17 },
-{ id: 1327, marca: "VW", nombre: "Gol Trend", precio: 700000, stock: 11 },
-{ id: 1327, marca: "Toyota", nombre: "Corolla", precio: 9500000, stock: 12 },
-{ id: 1327, marca: "VW", nombre: "Golf", precio: 8300000, stock: 15 }]
+{ id: 1328, marca: "Peugeot", nombre: "308", precio: 9500000, stock: 10 },
+{ id: 1329, marca: "FIAT", nombre: "Cronos", precio: 5500000, stock: 24 },
+{ id: 1330, marca: "FIAT", nombre: "Argo", precio: 6200000, stock: 17 },
+{ id: 1331, marca: "VW", nombre: "Gol Trend", precio: 700000, stock: 11 },
+{ id: 1332, marca: "Toyota", nombre: "Corolla", precio: 9500000, stock: 12 },
+{ id: 1333, marca: "VW", nombre: "Golf", precio: 8300000, stock: 15 },
+{ id: 1334, marca: "VW", nombre: "Fox", precio: 4300000, stock: 20 },
+{ id: 1335, marca: "FIAT", nombre: "Mobi", precio: 5300000, stock: 28 }]
 
 function login() {
     username = prompt("Ingresa tu usuario. ('admin' para tener todas las funciones)")

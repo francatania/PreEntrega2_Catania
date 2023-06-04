@@ -2,11 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 60px;
     font-size: 20px;
@@ -50,38 +51,90 @@
     font-size: 20px;
 }
 
-.consola {
-    display: flex;
-    height: 300px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 
-.consola h2 {
-    font-size: 40px;
-}
-
-.consola span {
-    color: blue;
-}
-
-.autos {
+.autos-container {
+    width: 80%;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     gap: 120px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    padding: 100px;
+    /* background-color: aqua; */
 }
+
 
 .card {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    height: 250px;
+    width: 350px;
 }
 
+.img-card img{
+    height: 200px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+
+/* .img-card-p208{
+    background-image: url(./assets/img/208.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-p308{
+    background-image: url(./assets/img/308.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-cronos{
+    background-image: url(./assets/img/cronos.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-argo{
+    background-image: url(./assets/img/argo.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-mobi{
+    background-image: url(./assets/img/mobi.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-gol{
+    background-image: url(./assets/img/gol.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-golf{
+    background-image: url(./assets/img/golf.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-corolla{
+    background-image: url(./assets/img/corolla.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img-card-fox{
+    background-image: url(./assets/img/fox.jpg);
+    background-size: cover;
+    background-position: center;
+} */
+
 .card h2 {
-    font-size: 50px;
+    font-size: 20px;
+    text-align: center;
 }
 
 footer {
@@ -89,11 +142,33 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90px;
+    height: 220px;
     padding-top: 20px;
+    overflow: hidden;
+    justify-content: space-between;
+    padding-bottom: 20px;
 }
 
 .listRedes {
     display: flex;
     gap: 20px;
+}
+
+.redes-icon i{
+    font-size: 30px;
+    list-style: none;
+    text-decoration: none;
+    color: #141414;
+}
+
+/* Media queries */
+
+@media only screen and (max-width:1650px) {
+    .autos-container {
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        justify-content: space-around;
+        row-gap: 60px ;
+    }
 }
