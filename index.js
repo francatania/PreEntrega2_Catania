@@ -1,4 +1,5 @@
 let username = ""
+let password = ""
 let usuarioLogueado = false
 
 class Autos {
@@ -51,7 +52,7 @@ function agregarAutos() {
 
 function agregarStock() {
     let nombre = prompt("A que auto queres agregar stock?")
-    let buscador = autos.findIndex(auto => auto.nombre == nombre)
+    let buscador = autos.findIndex(auto => auto.nombre.toUpperCase() == nombre.toUpperCase())
     let stock = 0
     if (buscador != -1) {
         stock = parseInt(prompt("Cuanto vas a agregar?"))
@@ -72,6 +73,20 @@ function verPrecios() {
     let eleccion = buscador.toUpperCase()
     let buscadorPrecio = autos.find(auto => auto.nombre.toUpperCase() === eleccion)
     return buscadorPrecio.precio
+}
+
+function verPreciosPorMarca(){
+    let marca = ""
+    marca = prompt("Escribí la marca que querés filtrar: ")
+    let autosFiltrados = autos.filter(auto => auto.marca.toUpperCase() === marca.toUpperCase())
+    if(autosFiltrados != ""){
+        for(let auto of autosFiltrados){
+            console.log(auto.nombre + " " + "$" + auto.precio)
+        }
+    }
+    else{
+        console.log("No se encontraron autos con la marca que escribiste.")
+    }   
 }
 
 function calcularCuotas(cuotas, precio) {
@@ -111,7 +126,6 @@ function calcularCuotas(cuotas, precio) {
                 console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
             }
         }
-
     }
 }
 
@@ -119,25 +133,28 @@ function abrirMenu() {
     login()
     while (usuarioLogueado) {
         let opcion = 0
-        opcion = parseInt(prompt("Que desea hacer? Presione '1' para ver nuestro catalogo de autos, '2' para calcular cuotas, '3' para agregar autos (admin) y '4' para agregar stock (admin) y '5 para salir"))
+        opcion = parseInt(prompt("Que desea hacer? Presione '1' para ver nuestro catalogo de autos, '2' para calcular cuotas, '3' para filtrar por marca, '4' para agregar autos (admin) y '5' para agregar stock (admin) y '6' para salir"))
         if (opcion === 1) {
             verAutos()
         }
         else if (opcion === 2) {
             let cantidadCuotas = 0
-            precio = verPrecios()
+            let precio = verPrecios()
             cantidadCuotas = parseInt(prompt("Cuantas cuotas queres? Hasta 💥24 cuotas SIN INTERES💥. A partir de la cuota 25 hay un %25 interes y a partir de la cuota 37 un %50"))
             calcularCuotas(cantidadCuotas, precio)
         }
-        else if (opcion === 3) {
-            if (username === "admin") {
+        else if(opcion === 3){
+            verPreciosPorMarca()
+        }
+        else if (opcion === 4) {
+            if (username === "admin" && password === "admin") {
                 agregarAutos()
             }
             else {
                 alert("Usted no es admin.")
             }
         }
-        else if (opcion === 4) {
+        else if (opcion === 5 && password === "admin") {
             if (username === "admin") {
                 agregarStock()
             }
@@ -145,10 +162,12 @@ function abrirMenu() {
                 alert("Usted no es admin.")
             }
         }
-        else if (opcion === 5) {
+        else if (opcion === 6) {
             alert("Adios!!")
             usuarioLogueado === false
             break
         }
     }
 }
+
+abrirMenu()
