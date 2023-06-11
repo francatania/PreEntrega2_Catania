@@ -10,6 +10,12 @@ class Autos {
         this.precio = precio
         this.stock = stock
     }
+    verStock(){
+        console.warn("Hay ", this.stock, " unidades de ", this.nombre)
+    }
+    verPrecio(){
+        console.log("El precio es de ", "$", this.precio)
+    }
 }
 
 const autos = [{ id: 1327, marca: "Peugeot", nombre: "208", precio: 7500000, stock: 13 },
@@ -47,7 +53,8 @@ function agregarAutos() {
     let stock = parseInt(prompt("Cuanto stock vas a agregar?: "))
     let autoNuevo = new Autos(id.toFixed(0), marca, nombre, precio, stock)
     autos.push(autoNuevo)
-    verAutos()
+    autoNuevo.verPrecio()
+    autoNuevo.verStock()
 }
 
 function agregarStock() {
@@ -64,11 +71,15 @@ function agregarStock() {
     }
 }
 
-function verPrecios() {
+function recorrerPrecios(){
     for (let auto of autos) {
         console.log(auto.nombre + " " + "$" + auto.precio)
     }
     console.log(" ")
+}
+
+function verPrecios() {
+    recorrerPrecios()
     let buscador = prompt("Escribí el auto que querés: ")
     let eleccion = buscador.toUpperCase()
     let buscadorPrecio = autos.find(auto => auto.nombre.toUpperCase() === eleccion)
@@ -89,44 +100,70 @@ function verPreciosPorMarca(){
     }   
 }
 
+function cuotasHasta24(precioCuota, precio, cuotas){
+    precioCuota = (precio / cuotas)
+    for (let i = 0; i < cuotas; i++) {
+        console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
+    }
+}
+
+function cuotasHasta36(precioCuota, precio, cuotas, interes){
+    for (let i = 0; i < cuotas; i++) {
+        precioCuota = (precio * interes) / cuotas
+        console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
+    }
+}
+
+function cuotasMasDe36(precioCuota, precio, cuotas, interes){
+    for (let i = 0; i < cuotas; i++) {
+        precioCuota = (precio * interes) / cuotas
+        console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
+    }
+}
+
 function calcularCuotas(cuotas, precio) {
     let precioCuota = 0
     let interes1 = 1.25
     let interes2 = 1.50
     if (cuotas < 25) {
-        precioCuota = (precio / cuotas)
-        for (let i = 0; i < cuotas; i++) {
-            console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-        }
+        cuotasHasta24(precioCuota, precio, cuotas)
     }
     else if (cuotas < 37 && cuotas > 24) {
-        for (let i = 0; i < cuotas; i++) {
-            if (i < 24) {
-                precioCuota = (precio / cuotas)
-                console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-            }
-            else {
-                precioCuota = (precio * interes1) / cuotas
-                console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-            }
-        }
+        cuotasHasta36(precioCuota, precio, cuotas, interes1)
     }
     else {
-        for (let i = 0; i < cuotas; i++) {
-            if (i < 24) {
-                precioCuota = (precio / cuotas)
-                console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-            }
-            else if (i >= 24 && i < 37) {
-                precioCuota = (precio * interes1) / cuotas
-                console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-            }
-            else {
-                precioCuota = (precio * interes2) / cuotas
-                console.log("cuota " + (i + 1) + ":" + " " + "$" + precioCuota.toFixed(0))
-            }
-        }
+        cuotasMasDe36(precioCuota, precio, cuotas, interes2)
     }
+}
+
+function activarOpcion2(){
+    let cantidadCuotas = 0
+    let precio = verPrecios()
+    cantidadCuotas = parseInt(prompt("Cuantas cuotas queres? Hasta 💥24 cuotas SIN INTERES💥. A partir de la cuota 25 hay un %25 interes y a partir de la cuota 37 un %50 en el precio total del auto."))
+    calcularCuotas(cantidadCuotas, precio)
+}
+
+function activarOpcion4(){
+    if (username === "admin" && password === "admin") {
+        agregarAutos()
+    }
+    else {
+        alert("Usted no es admin.")
+    }
+}
+
+function activarOpcion5(){
+    if (username === "admin") {
+        agregarStock()
+    }
+    else {
+        alert("Usted no es admin.")
+    }
+}
+
+function salir(){
+    alert("Adios!!")
+    usuarioLogueado = false
 }
 
 function abrirMenu() {
@@ -138,33 +175,19 @@ function abrirMenu() {
             verAutos()
         }
         else if (opcion === 2) {
-            let cantidadCuotas = 0
-            let precio = verPrecios()
-            cantidadCuotas = parseInt(prompt("Cuantas cuotas queres? Hasta 💥24 cuotas SIN INTERES💥. A partir de la cuota 25 hay un %25 interes y a partir de la cuota 37 un %50"))
-            calcularCuotas(cantidadCuotas, precio)
+            activarOpcion2()
         }
         else if(opcion === 3){
             verPreciosPorMarca()
         }
         else if (opcion === 4) {
-            if (username === "admin" && password === "admin") {
-                agregarAutos()
-            }
-            else {
-                alert("Usted no es admin.")
-            }
+            activarOpcion4()
         }
-        else if (opcion === 5 && password === "admin") {
-            if (username === "admin") {
-                agregarStock()
-            }
-            else {
-                alert("Usted no es admin.")
-            }
+        else if (opcion === 5) {
+            activarOpcion5()
         }
         else if (opcion === 6) {
-            alert("Adios!!")
-            usuarioLogueado === false
+            salir()
             break
         }
     }
